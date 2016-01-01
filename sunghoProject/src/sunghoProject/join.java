@@ -10,6 +10,7 @@ public class join {
 	String age;
 	String pn;
 	String school;
+	private write bw=new write();
 	
 	public void setContent(String id,String pw,String na,String ag,String pn,String sc){
 		this.id=id;
@@ -21,25 +22,8 @@ public class join {
 	}
 	
 	public void joinRegister(){
-		try{
-		FileWriter fw = new FileWriter("manager.txt",true);
-		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(this.id);
-		bw.write(":");
-		bw.write(this.pw);
-		bw.write(":");
-		bw.write(this.name);
-		bw.write(":");
-		bw.write(this.age);
-		bw.write(":");
-		bw.write(this.pn);
-		bw.write(":");
-		bw.write(this.school);
-		bw.newLine();
-		bw.close();
-		}catch(Exception E){
-			
-		}
+		bw.setContents(this.id, this.pw, this.name, this.age, this.pn, this.school);
+		bw.Write("manager.txt", true);
 	}
 	
 }

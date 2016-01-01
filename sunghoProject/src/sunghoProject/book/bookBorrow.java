@@ -7,88 +7,65 @@ import java.io.FileWriter;
 
 import javax.swing.JOptionPane;
 
+import sunghoProject.write;
+
 public class bookBorrow {
 	String numbTemp;
 	String input;
 	String[] sum=new String[100];
 	bookList bl=new bookList();
 	boolean ch=false;
-	
+	private write bw=new write();
+	private read br=new read();
 	public void check(String numb, String name){
 		numbTemp=numb;
 		try{
 			ch=false;
-			FileReader fr=new FileReader("user.txt");
-			BufferedReader bf=new BufferedReader(fr);
-			while((input=bf.readLine())!=null){
-				String[] temp=input.split(":");
+			String[] tmp=br.Read("user.txt");
+			for (int i = 0; i < tmp.length; i++) {
+				String[] temp=tmp[i].split(":");
 				if(temp[0].compareTo(numb)==0&&temp[1].compareTo(name)==0){
 					bookSelect bs=new bookSelect(this);
 					bl.notBorrow();
 					ch=true;
 				}
 			}
-			bf.close();
 			if(ch==false)
 			JOptionPane.showMessageDialog(null, "your name is not find", "Not Find Your number", JOptionPane.INFORMATION_MESSAGE);
 			}catch(Exception E){
 			}
 	}
-	
 	public void checkbook(String numb){
-		int order=0;
 		try{
 			ch=false;
-			
-			FileReader fr=new FileReader("book.txt");
-			BufferedReader bf=new BufferedReader(fr);
-			while((input=bf.readLine())!=null){
-				String[] temp=input.split(":");
+			String[] tmp=br.Read("book.txt");
+			for (int i = 0; i < tmp.length; i++) {
+				String[] temp=tmp[i].split(":");
 				if(temp[0].compareTo(numb)==0){
-					sum[order]=temp[0]+":"+numbTemp+":"+temp[2]+":"+temp[3]+":"+temp[4]+":"+temp[5];
-					order++;
+					sum[i]=temp[0]+":"+numbTemp+":"+temp[2]+":"+temp[3]+":"+temp[4]+":"+temp[5];
 					ch=true;
 				}
 				else{
-					sum[order]=input;
-					order++;
+					sum[i]=tmp[i];
 				}
 			}
-			bf.close();
 			if(ch==false){
 			JOptionPane.showMessageDialog(null, "your book is not find", "Not Find Your book", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else{
-				try{
-					FileWriter fw = new FileWriter("book.txt",false);
-					BufferedWriter bw = new BufferedWriter(fw);
-					order=0;
-					while(sum[order]!=null){
+				int order=0;
+				while(sum[order]!=null){
 					String[] temp=sum[order].split(":");
-					bw.write(temp[0]);
-					bw.write(":");
-					bw.write(temp[1]);
-					bw.write(":");
-					bw.write(temp[2]);
-					bw.write(":");
-					bw.write(temp[3]);
-					bw.write(":");
-					bw.write(temp[4]);
-					bw.write(":");
-					bw.write(temp[5]);
-					bw.newLine();
+					bw.setContents(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5]);
+					if(order==0)
+					bw.Write("book.txt",false);
+					else
+					bw.Write("book.txt",true);
 					order++;
-					}
-					bw.close();
-					}catch(Exception E){
-						
-					}
-				
+				}
 				
 			}
 			}catch(Exception E){
 			}
-		
-		
 	}
 }

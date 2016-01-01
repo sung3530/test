@@ -1,6 +1,7 @@
 package sunghoProject;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -44,7 +45,6 @@ public class userBookList extends JFrame implements ActionListener {
 		
 		setVisible(true);
 		setBounds(300,300,400,150);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		
 		

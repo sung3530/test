@@ -44,7 +44,7 @@ public class userJoinGui extends JFrame implements ActionListener {
 		
 		setVisible(true);
 		setBounds(300,300,300,250);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	
 		
 	}
 

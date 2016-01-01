@@ -7,58 +7,40 @@ import java.io.FileWriter;
 
 import javax.swing.JOptionPane;
 
+import sunghoProject.write;
+
 public class bookDelete {
 	private
 		String input;
 		boolean checkUser=false;
 		String[] sum=new String[100];
-		int order;
 		int i;
+		write bw=new write();
+		read br=new read();
 	public void find(String bpn,String tt){
-		try{
-			order=0;
-			FileReader fr=new FileReader("book.txt");
-			BufferedReader bf=new BufferedReader(fr);
-			while((input=bf.readLine())!=null){
-				String[] temp=input.split(":");
-				if(temp[0].compareTo(bpn)==0&&temp[2].compareTo(tt)==0){
-					this.checkUser=true;
-				}
-				else{
-					sum[order]=input;
-					order++;
-				}
+		String[] tmp=br.Read("book.txt");
+		for (int i = 0; i < tmp.length; i++) {
+			String[] temp=tmp[i].split(":");
+			if(temp[0].compareTo(bpn)==0&&temp[2].compareTo(tt)==0){
+				this.checkUser=true;
 			}
-			bf.close();
-			}catch(Exception E){
-				
+			else{
+				sum[i]=input;
 			}
+		}
 	}
 	public void delete(){
 		if(this.checkUser==true){
 			i=0;
-				try{
-					FileWriter fw = new FileWriter("book.txt",false);
-					BufferedWriter bw = new BufferedWriter(fw);
-					do{
-						String[] temp=sum[i].split(":");
-					bw.write(temp[0]);
-					bw.write(":");
-					bw.write(temp[1]);
-					bw.write(":");
-					bw.write(temp[2]);
-					bw.write(":");
-					bw.write(temp[3]);
-					bw.write(":");
-					bw.write(temp[4]);
-					bw.write(":");
-					bw.write(temp[5]);
-					bw.newLine();
+				do{
+					String[] temp=sum[i].split(":");
+					bw.setContents(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5]);
+					if(i==0)
+					bw.Write("book.txt",false);
+					else
+						bw.Write("book.txt",true);
 					i++;
-					}while(sum[i]!=null);
-					bw.close();
-					}catch(Exception E){
-					}
+				}while(sum[i]!=null);
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "The book is not find.", "Delete System", JOptionPane.INFORMATION_MESSAGE);

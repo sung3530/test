@@ -42,7 +42,7 @@ public class findUserGui extends JFrame implements ActionListener{
 		
 		setVisible(true);
 		setBounds(300,300,300,200);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 		
 		
 	}

@@ -42,7 +42,6 @@ public class returnBookGui extends JFrame implements ActionListener {
 		
 		setVisible(true);
 		setBounds(300,300,400,150);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 	}
 

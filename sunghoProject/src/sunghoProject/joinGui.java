@@ -43,7 +43,7 @@ public class joinGui extends JFrame implements ActionListener {
 		
 		setVisible(true);
 		setBounds(300,300,300,350);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 		
 	}
 

@@ -3,31 +3,24 @@ package sunghoProject;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import sunghoProject.book.read;
+
 public class privateNumberGenerate {
 	private
 		int number;
 		String exNumb;
 		String input;
+		read rr=new read();
 	public String generateNumber(String file){
-	
-		try{
-			FileReader fr=new FileReader(file);
-			BufferedReader bf=new BufferedReader(fr);
-			number=(int)(Math.random()*10000);
-			exNumb = number+"";
-			while((input=bf.readLine())!=null){
-				String[] temp=input.split(":");
-				if(temp[0].compareTo(exNumb)==0){
-					bf.close();
-					return null;
-				}
+		String[] tmp=rr.Read(file);
+		number=(int)(Math.random()*10000);
+		exNumb = number+"";
+		for (int i = 0; i < tmp.length; i++) {
+			String[] temp=tmp[i].split(":");
+			if(temp[0].compareTo(exNumb)==0){
+				return null;
 			}
-			bf.close();
-			return exNumb;
-			}catch(Exception E){
-				
-			}
-		
+		}
 		return exNumb;
 	}
 }

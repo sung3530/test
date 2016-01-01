@@ -7,61 +7,42 @@ import java.io.FileWriter;
 
 import javax.swing.JOptionPane;
 
+import sunghoProject.book.read;
+
 public class returnBook {
 	boolean ch;
 	String input;
 	String[] sum=new String[100];
-	
+	private write bw=new write();
+	private read br=new read();
 	public void checkbook(String numb){
-		int order=0;
 		try{
 			ch=false;
-			
-			FileReader fr=new FileReader("book.txt");
-			BufferedReader bf=new BufferedReader(fr);
-			while((input=bf.readLine())!=null){
-				String[] temp=input.split(":");
-				if(temp[0].compareTo(numb)==0){
-					sum[order]=temp[0]+":"+"1"+":"+temp[2]+":"+temp[3]+":"+temp[4]+":"+temp[5];
-					order++;
+			String[] tmp=br.Read("book.txt");
+			for (int i = 0; i < tmp.length; i++) {
+				String[] divd=tmp[i].split(":");
+				if(divd[0].compareTo(numb)==0){
+					sum[i]=divd[0]+":"+"1"+":"+divd[2]+":"+divd[3]+":"+divd[4]+":"+divd[5];
 					ch=true;
 				}
 				else{
-					sum[order]=input;
-					order++;
+					sum[i]=input;
 				}
 			}
-			bf.close();
 			if(ch==false){
 			JOptionPane.showMessageDialog(null, "your book is not find", "Not Find Your book", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else{
-				try{
-					FileWriter fw = new FileWriter("book.txt",false);
-					BufferedWriter bw = new BufferedWriter(fw);
-					order=0;
-					while(sum[order]!=null){
-					String[] temp=sum[order].split(":");
-					bw.write(temp[0]);
-					bw.write(":");
-					bw.write(temp[1]);
-					bw.write(":");
-					bw.write(temp[2]);
-					bw.write(":");
-					bw.write(temp[3]);
-					bw.write(":");
-					bw.write(temp[4]);
-					bw.write(":");
-					bw.write(temp[5]);
-					bw.newLine();
-					order++;
-					}
-					bw.close();
-					}catch(Exception E){
-						
-					}
-				
-				
+				int order=0;
+				while(sum[order]!=null){
+				String[] temp=sum[order].split(":");
+				bw.setContents(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5]);
+				if(order==0)
+				bw.Write("book.txt",false);
+				else
+					bw.Write("book.txt",true);
+				order++;
+				}
 			}
 			}catch(Exception E){
 			}

@@ -5,24 +5,20 @@ import java.io.FileReader;
 
 import javax.swing.JOptionPane;
 
+import sunghoProject.book.read;
+
 public class findUser {
 	String input;
-	
+	private read rr=new read();
 	public void find(String name,String ph){
-		try{
-		FileReader fr=new FileReader("user.txt");
-		BufferedReader bf=new BufferedReader(fr);
-		while((input=bf.readLine())!=null){
-			String[] temp=input.split(":");
+		String[] tmp=rr.Read("user.txt");
+		for (int i = 0; i < tmp.length; i++) {
+			String[] temp=tmp[i].split(":");
 			if(temp[1].compareTo(name)==0&&temp[3].compareTo(ph)==0){
-				bf.close();
 				JOptionPane.showMessageDialog(null, temp[0]+"\n is your Private Number", "Find Your number", JOptionPane.INFORMATION_MESSAGE);
+				return;
 			}
 		}
-		bf.close();
 		JOptionPane.showMessageDialog(null, "\n your name is not find", "Not Find Your number", JOptionPane.INFORMATION_MESSAGE);
-		}catch(Exception E){
-		}
-		
 	}
 }

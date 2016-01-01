@@ -42,7 +42,6 @@ public class bookDeleteGui extends JFrame implements ActionListener {
 		
 		setVisible(true);
 		setBounds(300,300,400,200);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 	}
 

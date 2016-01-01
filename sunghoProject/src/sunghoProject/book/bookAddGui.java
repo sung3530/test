@@ -43,7 +43,6 @@ public class bookAddGui extends JFrame implements ActionListener {
 		
 		setVisible(true);
 		setBounds(300,300,300,300);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	@Override
